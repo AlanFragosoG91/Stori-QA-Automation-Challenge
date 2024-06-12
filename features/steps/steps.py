@@ -77,15 +77,21 @@ def step_impl(context):
 
 @then('I print the courses that cost $25')
 def step_impl(context):
-    courses = context.driver.find_elements(By.XPATH, '//td[contains(text(), "$25")]/preceding-sibling::td[1]')
-    for course in courses:
-        print(course.text)
+    # Using CSS Selector for parent element and XPath to find the child
+    course_prices = context.driver.find_elements(By.CSS_SELECTOR, 'td')
+    for price in course_prices:
+        if price.text == "$25":
+            course_name = price.find_element(By.XPATH, './preceding-sibling::td[1]').text
+            print(course_name)
 
 @then('I print the courses that cost $15')
 def step_impl(context):
-    courses = context.driver.find_elements(By.XPATH, '//td[contains(text(), "$15")]/preceding-sibling::td[1]')
-    for course in courses:
-        print(course.text)
+    # Using CSS Selector for parent element and XPath to find the child
+    course_prices = context.driver.find_elements(By.CSS_SELECTOR, 'td')
+    for price in course_prices:
+        if price.text == "$15":
+            course_name = price.find_element(By.XPATH, './preceding-sibling::td[1]').text
+            print(course_name)
 
 @then('I print the names of all Engineers')
 def step_impl(context):
