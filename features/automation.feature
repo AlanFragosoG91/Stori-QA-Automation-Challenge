@@ -1,4 +1,4 @@
-Feature: Automation Practice Testing
+Feature: Stori-QA-Automation-Challenge
 
   Scenario: Suggestion Class Example
     Given I open the browser and navigate to the automation practice page

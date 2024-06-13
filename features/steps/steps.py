@@ -153,6 +153,6 @@ def step_impl(context):
             course_name = course.find_element(By.XPATH, './td[1]').text
             print(f"Course at odd index {index}: {course_name}")
 
-@then('I close the browser')
-def step_impl(context):
-    context.driver.quit()
+#@then('I close the browser')
+#def step_impl(context):
+#   context.driver.quit()
