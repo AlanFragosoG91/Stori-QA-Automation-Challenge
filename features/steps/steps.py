@@ -77,21 +77,39 @@ def step_impl(context):
 
 @then('I print the courses that cost $25')
 def step_impl(context):
-    # Using CSS Selector for parent element and XPath to find the child
-    course_prices = context.driver.find_elements(By.CSS_SELECTOR, 'td')
-    for price in course_prices:
+    # Encontramos todas las celdas de precios en la tabla
+    courses_25 = context.driver.find_elements(By.CSS_SELECTOR, 'table[name="courses"] td:nth-child(3)')
+    count_25 = 0
+    course_names_25 = []
+    for price in courses_25:
         if price.text == "$25":
+    # Navegamos a la celda anterior que contiene el nombre del curso  
             course_name = price.find_element(By.XPATH, './preceding-sibling::td[1]').text
-            print(course_name)
+            course_names_25.append(course_name)
+    #Se agrega el nombre del curso a una lista reduciendo la sobrecarga de interacciones con el navegador y mejorando el rendimiento del script. "Append" se usa para acumular resulados de un bucle.
+            count_25 += 1
+    print(f"Number of courses that cost $25: {count_25}")
+    print("Courses that cost $25:")
+    for name in course_names_25:
+        print(name)
 
 @then('I print the courses that cost $15')
 def step_impl(context):
-    # Using CSS Selector for parent element and XPath to find the child
-    course_prices = context.driver.find_elements(By.CSS_SELECTOR, 'td')
-    for price in course_prices:
+     # Encontramos todas las celdas de precios en la tabla
+    courses_15 = context.driver.find_elements(By.CSS_SELECTOR, 'table[name="courses"] td:nth-child(3)')
+    count_15 = 0
+    course_names_15 = []
+    for price in courses_15:
         if price.text == "$15":
+    # Navegamos a la celda anterior que contiene el nombre del curso        
             course_name = price.find_element(By.XPATH, './preceding-sibling::td[1]').text
-            print(course_name)
+            course_names_15.append(course_name)
+    #Se agrega el nombre del curso a una lista reduciendo la sobrecarga de interacciones con el navegador y mejorando el rendimiento del script. "Append" se usa para acumular resulados de un bucle.
+            count_15 += 1
+    print(f"Number of courses that cost $15: {count_15}")
+    print("Courses that cost $15:")
+    for name in course_names_15:
+        print(name)
 
 @then('I print the names of all Engineers')
 def step_impl(context):
