@@ -17,10 +17,28 @@ def step_impl(context, text, country):
     country_option = context.driver.find_element(By.XPATH, f'//li[contains(text(), "{country}")]')
     country_option.click()
 
-@when('I select option {option} in the dropdown')
-def step_impl(context, option):
-    dropdown = Select(context.driver.find_element(By.XPATH, '//select[@id="dropdown-class-example"]'))
-    dropdown.select_by_index(int(option))
+@when('I select option 2 and then option 3 in the dropdown')
+def step_impl(context):
+    # Suponemos que el dropdown es el primer select en el formulario
+    dropdown = context.driver.find_element(By.XPATH, '//form//select[1]')
+
+    # Seleccionar opción 2
+    option_2 = dropdown.find_element(By.XPATH, './option[2]')
+    option_2.click()
+    time.sleep(1)  # Pausa para ver el cambio
+
+    # Seleccionar opción 3
+    option_3 = dropdown.find_element(By.XPATH, './option[3]')
+    option_3.click()
+    time.sleep(1)  # Pausa para ver el cambio
+
+@then('I should be able to see the change in the dropdown')
+def step_impl(context):
+    # Verificar que la opción 3 está seleccionada
+    dropdown = context.driver.find_element(By.XPATH, '//form//select[1]')
+    selected_option = dropdown.find_element(By.XPATH, './option[@selected]')
+    assert selected_option == dropdown.find_element(By.XPATH, './option[3]')
+    context.driver.quit()
 
 @when('I click the Open Window button')
 def step_impl(context):
@@ -48,7 +66,7 @@ def step_impl(context):
 def step_impl(context):
     button = context.driver.find_element(By.XPATH, '//span[contains(text(), "Login")]')
     context.driver.execute_script("arguments[0].scrollIntoView();", button)
-    context.driver.save_screenshot('screenshotTest.png')
+    context.driver.save_screenshot('I scroll to the specific button and take a screenshot.png')
     context.driver.switch_to.window(context.driver.window_handles[0])
 
 @when('I type "Stori Card" and click the Alert button')
@@ -125,11 +143,15 @@ def step_impl(context):
 
 @then('I print the text highlighted in blue')
 def step_impl(context):
-    iframe = context.driver.find_element(By.XPATH, '//iframe[@id="courses-iframe"]')
-    context.driver.switch_to.frame(iframe)
-    text = context.driver.find_element(By.XPATH, '//h1')
-    print(text.text)
-    context.driver.switch_to.default_content()
+    # Seleccionamos todas las filas de la tabla de cursos
+    courses = context.driver.find_elements(By.XPATH, '//table[@name="courses"]/tbody/tr')
+    
+    # Recorremos las filas y imprimimos solo los índices impares
+    for index, course in enumerate(courses):
+        if index % 2 != 0:
+            # Suponemos que el nombre del curso está en la primera celda
+            course_name = course.find_element(By.XPATH, './td[1]').text
+            print(f"Course at odd index {index}: {course_name}")
 
 @then('I close the browser')
 def step_impl(context):
