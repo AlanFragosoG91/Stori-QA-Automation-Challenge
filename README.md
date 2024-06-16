@@ -1,5 +1,5 @@
 # Stori-QA-Automation-Challenge
-Este proyecto utiliza Behave, una herramienta de pruebas BDD (Behavior-Driven Development)
+Este proyecto utiliza Behave junto con Appium para automatizar pruebas de aplicaciones móviles en dispositivos Android e iOS.
 
 ## Estructura del Proyecto
 
@@ -24,7 +24,11 @@ my_behave_project/
 ## Pre-requisitos
 
 1. **Python 3.x**: Asegúrate de tener Python 3.x instalado en tu sistema. Puedes descargarlo desde [python.org](https://www.python.org/downloads/).
-2. **Chrome WebDriver**: Descarga el Chrome WebDriver compatible con la versión de tu navegador Chrome desde [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) y asegúrate de que esté en tu PATH.
+2. **Appium Server**: Descarga e instala Appium desde [Appium](http://appium.io/).
+3. **Android SDK**: Para pruebas en Android, asegúrate de tener el SDK de Android instalado y configurado.
+4. **Xcode**: Para pruebas en iOS, asegúrate de tener Xcode instalado y configurado.
+5. **Dispositivo o Emulador**: Configura un dispositivo físico o emulador de Android/iOS.
+
 
 ## Instalación
 
@@ -45,13 +49,26 @@ my_behave_project/
     pip install -r requirements.txt
     ```
 
+4. **Configurar `features/environment.py`**: Asegúrate de que las capacidades deseadas (desired capabilities) en el archivo `environment.py` estén configuradas correctamente para tu dispositivo/emulador y aplicación.
+
+
 ## Ejecución de pruebas
 
 1. **Navegar a la carpeta del proyecto:**
     ```bash
     cd behave project
     ```
+2. **Iniciar el servidor de Appium**:
+    ```bash
+    appium
+
 2. **Ejecutar las pruebas con Behave**
     ```bash
     behave -f behave_html_formatter:HTMLFormatter -o reports/TestExecution.html
     ```
+
+## Notas
+
+1. Asegúrate de reemplazar "emulator-5554" y "/path/to/your/app.apk" con los valores correctos para tu dispositivo/emulador y aplicación.
+
+2. Las rutas y los selectores XPath en steps.py deben ser ajustados según la estructura real del DOM de tu aplicación móvil.
