@@ -33,7 +33,7 @@ Feature: Stori-QA-Automation-Challenge
     And I verify and accept the confirm text
 
   Scenario: Web Table Example
-    Given I open the browser and navigate to the automation practice page
+    Given I open the browser and navigate to the Web Table Example
     Then I print the courses that cost $25
     And I print the courses that cost $15
 

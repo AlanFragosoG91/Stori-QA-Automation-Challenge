@@ -169,6 +169,7 @@ def step_impl(context):
             course_names_25.append(course_name)
     #Se agrega el nombre del curso a una lista reduciendo la sobrecarga de interacciones con el navegador y mejorando el rendimiento del script. "Append" se usa para acumular resulados de un bucle.
             count_25 += 1
+
     print(f"Number of courses that cost $25: {count_25}")
     print("Courses that cost $25:")
     for name in course_names_25:
@@ -187,9 +188,10 @@ def step_impl(context):
             course_names_15.append(course_name)
     #Se agrega el nombre del curso a una lista reduciendo la sobrecarga de interacciones con el navegador y mejorando el rendimiento del script. "Append" se usa para acumular resulados de un bucle.
             count_15 += 1
+
     print(f"Number of courses that cost $15: {count_15}")
     print("Courses that cost $15:")
-    for name in course_names_15:
+    for name in course_names_15
         print(name)
 
 @then('I print the names of all Engineers')
